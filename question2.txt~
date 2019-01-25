@@ -1,0 +1,46 @@
+A research lab keeps track of all projects PhD students and lab technicians work on. This data consists of
+
+    Personnel number
+    Name
+    Date of birth
+    Lab code
+    Lab name
+    Research code
+    Research description
+    Research supervisor
+
+Normalise this data up to 3NF, taking in to account these constraints:
+
+    Each personnel number is unique
+    Each lab has a single lab code
+    Each research project has a single code and supervisor
+    Each member of the personnel may work on one or more research projects
+    Personnel names need not necessarily be unique
+    Research code, description and supervisor are repeating fields
+
+Save the results of each normalisation step, together with a description of the steps you took in a document with a clear name. Add this document to your git-repository and choose a suiting commit-message.
+
+
+## UNF -> just leave it as it is
+
+DB (Personnel number,Name,Date of birth,Lab code,Lab name,Research code,Research description,Research supervisor)
+
+## 1NF -> no repeats (make sure that everything is in 1 field, 
+add multiple rows if needed for res code, descr and sup) + set/mention candidate keys 
+
+DB (Personnel number,Name,Date of birth,Lab code,Lab name,Research code,Research description,Research supervisor)
+
+
+candidate keys -> (Personnel number, lab code, research code)
+
+## 2NF -> non key values have to be dependant on the primary key
+
+Personnel (Personnel number, name, date of birth, labcode, research code)
+lab (lab code, personnel number, lab name)
+research (research code, personnel number, research discription, research supervisor)
+
+candidate keys (personnel number, labcode, researchcode - personnel number, lab code - personnel number, research code)
+
+## 3NF -> non key values have to be non-trans. dependant on primary key
+-> no non direct non key values are present, so 2NF = 3NF
+
